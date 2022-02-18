@@ -1,7 +1,7 @@
 # import the necessary packages
 from pyimagesearch.motion_detection.singlemotiondetector import SingleMotionDetector
 from imutils.video import VideoStream
-from flask import Response
+from flask import Response, redirect
 from flask import Flask
 from flask import render_template
 import threading
@@ -28,6 +28,10 @@ time.sleep(2.0)
 
 @app.route("/")
 def index():
+	return redirect("/camera")
+
+@app.route("/camera")
+def main():
 	# return the rendered template
 	return render_template("index.html")
 
@@ -120,7 +124,7 @@ if __name__ == '__main__':
 	t.start()
 
 	# start the flask app
-	app.run(host="0.0.0.0", port=8080, debug=False,
+	app.run(host="0.0.0.0", port=80, debug=False,
 		threaded=True, use_reloader=False)
 
 # release the video stream pointer
